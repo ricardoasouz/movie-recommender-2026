@@ -12,6 +12,13 @@ services:
     volumes:
       - ../data:/app/services/api/data
 
+  trainer:
+    build:
+      context: ..
+      dockerfile: services/trainer/Dockerfile
+    volumes:
+      - ../data:/app/data
+
   db:
     image: postgres:16
     environment:
