@@ -1,0 +1,27 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: services/api/Dockerfile
+    env_file:
+      - ../.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ../data:/app/services/api/data
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: recommender
+      POSTGRES_USER: recommender
+      POSTGRES_PASSWORD: recommender
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
