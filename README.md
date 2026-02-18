@@ -13,7 +13,7 @@ Containerized movie recommender (Feb 2026 stack): FastAPI API, offline training 
 
 ***- and CI for quality gates.***
 
-## “Technologies (Feb 2026)” section (concise + realistic)
+## “Technologies (Feb 2026)” ##
 
 * **Python 3.12+**
 * **FastAPI + Uvicorn** (API)
