@@ -1,7 +1,7 @@
 {
   "schema": "cf_item_item_v1",
-  "movies_csv": "data/raw/movies.csv",
-  "ratings_csv": "data/raw/ratings.csv",
+  "movies_csv": "/app/data/raw/movies.csv",
+  "ratings_csv": "/app/data/raw/ratings.csv",
   "min_ratings_per_movie": 50,
   "min_ratings_per_user": 20,
   "topk_per_movie": 200,
