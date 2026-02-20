@@ -54,16 +54,29 @@ def recommend(
         return {"movie": movie, "k": k, "recommendations": recommend_dummy(movie, k), "mode": "dummy"}
 
     recs = _cf.recommend(movie, k)
-    # Helpful UX: if not found, return suggestions
+
     if not recs:
         suggestions = _cf.search_titles(movie, limit=10)
-        return {
-            "movie": movie,
-            "k": k,
-            "recommendations": [],
-            "mode": "cf_item_item_v1",
-            "not_found": True,
-            "suggestions": suggestions,
-        }
 
-    return {"movie": movie, "k": k, "recommendations": recs, "mode": "cf_item_item_v1"}
+    # Auto-pick: if user typed a partial title and we have a clear first match,
+    # try recommending using the top suggestion.
+    if suggestions:
+        picked = suggestions[0]
+        recs2 = _cf.recommend(picked, k)
+        if recs2:
+            return {
+                "movie": movie,
+                "k": k,
+                "recommendations": recs2,
+                "mode": "cf_item_item_v1",
+                "resolved_to": picked,
+            }
+
+        return {
+                "movie": movie,
+                "k": k,
+                "recommendations": [],
+                "mode": "cf_item_item_v1",
+                "not_found": True,
+                "suggestions": suggestions,
+            }
