@@ -7,11 +7,11 @@ Containerized movie recommender (Feb 2026 stack): FastAPI API, offline training 
 
 ***- FastAPI for serving,***
 
-***- a separate offline training pipeline,***
+   ***- a separate offline training pipeline,***
 
-***- PostgreSQL for metadata/logging,***
+      ***- PostgreSQL for metadata/logging,***
 
-***- and CI for quality gates.***
+         ***- and CI for quality gates.***
 
 ## “Technologies (Feb 2026)” ##
 
