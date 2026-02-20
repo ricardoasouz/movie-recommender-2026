@@ -19,17 +19,15 @@ services:
     volumes:
       - ../data:/app/data
     command:
-    [
-      "python",
-      "-m",
-      "recommender.build_index_cf",
-      "--movies",
-      "/app/data/raw/movies.csv",
-      "--ratings",
-      "/app/data/raw/ratings.csv",
-      "--out",
-      "/app/data/processed/index_cf"
-    ]
+      - python
+      - -m
+      - recommender.build_index_cf
+      - --movies
+      - /app/data/raw/movies.csv
+      - --ratings
+      - /app/data/raw/ratings.csv
+      - --out
+      - /app/data/processed/index_cf
 
   db:
     image: postgres:16
