@@ -19,7 +19,9 @@ app.add_middleware(
 
 
 
-ARTIFACTS_DIR = Path("data/processed/index_cf")
+import os
+
+ARTIFACTS_DIR = Path(os.getenv("CF_ARTIFACTS_DIR", "/app/data/processed/index_cf"))
 _cf = ItemItemCFRecommender(ARTIFACTS_DIR) if ARTIFACTS_DIR.exists() else None
 
 
