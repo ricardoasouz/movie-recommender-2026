@@ -80,3 +80,43 @@ def recommend(
                 "not_found": True,
                 "suggestions": suggestions,
             }
+
+
+@app.get("/recommend")
+def recommend(
+    movie: str = Query(..., min_length=1),
+    k: int = Query(5, ge=1, le=50),
+):
+    if _cf is None:
+        return {"movie": movie, "k": k, "recommendations": recommend_dummy(movie, k), "mode": "dummy"}
+
+    # Try direct match first
+    recs = _cf.recommend(movie, k)
+    if recs:
+        return {"movie": movie, "k": k, "recommendations": recs, "mode": "cf_item_item_v1"}
+
+    # Not found: get suggestions
+    suggestions = _cf.search_titles(movie, limit=10)
+
+    # Auto-pick best suggestion
+    if suggestions:
+        picked = suggestions[0]
+        recs2 = _cf.recommend(picked, k)
+        if recs2:
+            return {
+                "movie": movie,
+                "k": k,
+                "recommendations": recs2,
+                "mode": "cf_item_item_v1",
+                "resolved_to": picked,
+            }
+
+    # Still not found (or auto-pick produced no recs)
+    return {
+        "movie": movie,
+        "k": k,
+        "recommendations": [],
+        "mode": "cf_item_item_v1",
+        "not_found": True,
+        "suggestions": suggestions,
+    }
