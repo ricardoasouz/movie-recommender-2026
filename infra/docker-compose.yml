@@ -13,21 +13,21 @@ services:
       - ../data:/app/data
 
   trainer:
-    build:
-      context: ..
-      dockerfile: services/trainer/Dockerfile
-    volumes:
-      - ../data:/app/data
-    command:
-      - python
-      - -m
-      - recommender.build_index_cf
-      - --movies
-      - /app/data/raw/movies.csv
-      - --ratings
-      - /app/data/raw/ratings.csv
-      - --out
-      - /app/data/processed/index_cf
+   
+   build:
+    context: ..
+    dockerfile: services/trainer/Dockerfile
+   
+   volumes:
+    - ../data:/app/data
+
+   command:
+    - --movies
+    - /app/data/raw/movies.csv
+    - --ratings
+    - /app/data/raw/ratings.csv
+    - --out
+    - /app/data/processed/index_cf
 
   db:
     image: postgres:16
