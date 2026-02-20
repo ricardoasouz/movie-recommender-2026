@@ -3,7 +3,7 @@
 Containerized movie recommender (Feb 2026 stack): FastAPI API, offline training pipeline, Postgres, CI, reproducible builds.
 
 
-***A reproducible, containerized movie recommendation system built with a modern Feb-2026 Python stack:* **
+A reproducible, containerized movie recommendation system built with a modern Feb-2026 Python stack:
 
 ***- FastAPI for serving,***
 
