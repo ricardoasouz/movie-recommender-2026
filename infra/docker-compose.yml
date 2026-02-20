@@ -10,7 +10,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ../data:/app/services/api/data
+      - ../data:/app/data
 
   trainer:
     build:
