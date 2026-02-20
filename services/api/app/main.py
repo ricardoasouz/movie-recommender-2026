@@ -3,9 +3,21 @@ from __future__ import annotations
 from pathlib import Path
 
 from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
+
 from recommender.core import ItemItemCFRecommender, recommend_dummy
 
 app = FastAPI(title="Movie Recommender (2026)")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 ARTIFACTS_DIR = Path("data/processed/index_cf")
 _cf = ItemItemCFRecommender(ARTIFACTS_DIR) if ARTIFACTS_DIR.exists() else None
